@@ -32,12 +32,15 @@ public class AboutMe extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
-
+        String id = request.getParameter("id");      
+        
         PrintWriter out = response.getWriter();
         String filePath = getServletContext().getRealPath("/AboutMe.html");
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = br.readLine()) != null) {
+        	if(id==null) id = "?id=63135901";
+            line = line.replace("${id}", id);
             out.println(line);
         }
        
