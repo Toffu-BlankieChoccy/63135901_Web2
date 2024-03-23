@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add</title>
+</head>
+<body>
+	<center>
+		<form method="get" action="addCal">
+			First number: <input type="text" name="a"><br> 
+			Second number: <input type="text" name="b"><br>
+			<input type="submit" value="Tính tổng">
+			<span>Result: </span> 
+			<span th:text="${aaa + bbb}"></span>
+			
+		</form>
+	</center>
+</body>
+</html>
