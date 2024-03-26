@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách sinh viên</title>
+<link rel="stylesheet" type="text/css" href="/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">NTU</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="">Trang chủ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="sinhvien">Danh sách sinh viên</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Để nav cho có</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h1>Danh sách sinh viên</h1>
+    <table border="1">
+        <tr>
+            <th>Mã sinh viên</th>
+            <th>Tên sinh viên</th>
+            <th>Điểm tích lũy</th>
+        </tr>
+        <tr th:each="sinhVien : ${danhSachSinhVien}">
+    <td th:text="${sinhVien.maSV}"></td>
+    <td th:text="${sinhVien.tenSV}"></td>
+    <td th:text="${sinhVien.diemTichLuy}"></td>
+</tr>
+    </table>
+
+<h1>Thêm mới sinh viên</h1>
+    <form action="/addSV" method="post">
+        <label for="maSV">Mã sinh viên:</label>
+        <input type="text" id="maSV" name="maSV" required>
+        <br>
+        <label for="tenSV">Tên sinh viên:</label>
+        <input type="text" id="tenSV" name="tenSV" required>
+        <br>
+        <label for="diemTichLuy">Điểm tích lũy:</label>
+        <input type="number" id="diemTichLuy" name="diemTichLuy" required>
+        <br>
+        <button type="submit">Thêm mới</button>
+    </form>
+
+<script src="/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="/js/jquery-3.7.1.min.js"></script>
+</body>
+</html>
