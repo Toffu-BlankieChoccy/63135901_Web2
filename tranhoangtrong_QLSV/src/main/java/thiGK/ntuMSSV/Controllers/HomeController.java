@@ -15,7 +15,7 @@ import thiGK.ntuMSSV.Models.SinhVien;
 
 @Controller
 public class HomeController {
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String home(Model model) {		
 		return "index";
 	}
@@ -31,7 +31,7 @@ public class HomeController {
 	
 	@GetMapping("/add")
 	public String add(Model model) {
-		SinhVien sinhVien = new SinhVien();
+		SinhVien sinhVien = new SinhVien(null,null,0);
         model.addAttribute("sinhVien", sinhVien);
 		return "add";
 	}
