@@ -23,6 +23,21 @@ public class SinhVienService {
 
         return danhSachSinhVien;
     }
+	
+	public static SinhVien timKiemSinhVien(String maSinhVien) {
+        List<SinhVien> danhSachSinhVien = dsSinhViens();
+        for (SinhVien sv : danhSachSinhVien) {
+            if (sv.getMaSV().equals(maSinhVien)) {
+                return sv;
+            }
+        }
+        return null;
+    }
+	
+	public static void themMoiSinhVien(SinhVien sinhVien) {
+        List<SinhVien> danhSachSinhVien = dsSinhViens();
+        danhSachSinhVien.add(sinhVien);
+    }
     
 
 }
