@@ -1,0 +1,22 @@
+package tech.toffu.business_web_app_project.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import tech.toffu.business_web_app_project.models.Employee;
+import tech.toffu.business_web_app_project.repositories.EmployeeRepository;
+
+@Service
+public class EmployeeImp implements EmployeeService{
+
+	@Autowired	
+	private EmployeeRepository employeeRepository;
+	
+	@Override
+	public List<Employee> getAllEmployees() {
+		return employeeRepository.findAll();
+	}
+
+}
