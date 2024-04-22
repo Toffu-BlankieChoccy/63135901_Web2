@@ -9,4 +9,5 @@ import tech.toffu.business_web_app_project.models.Employee;
 @Service
 public interface EmployeeService {
 	List<Employee> getAllEmployees();
+	void saveEmployee(Employee employee);
 }
