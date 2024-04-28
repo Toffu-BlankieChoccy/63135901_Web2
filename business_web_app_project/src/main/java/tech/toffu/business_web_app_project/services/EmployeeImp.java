@@ -1,14 +1,13 @@
 package tech.toffu.business_web_app_project.services;
 
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import tech.toffu.business_web_app_project.models.Employee;
 import tech.toffu.business_web_app_project.repositories.EmployeeRepository;
 
@@ -48,8 +47,11 @@ public class EmployeeImp implements EmployeeService {
 	}
 
 	@Override
-	public Page<Employee> findPaginated(int pageNo, int pageSize) {
-		PageRequest pageable = PageRequest.of(pageNo-1, pageSize);
+	public Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+				: Sort.by(sortField).descending();
+
+		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.employeeRepository.findAll(pageable);
 	}
 }
