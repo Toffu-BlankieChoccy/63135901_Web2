@@ -3,7 +3,7 @@ package tech.toffu.business_web_app_project.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "employees", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Employee {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
