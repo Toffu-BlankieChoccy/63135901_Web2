@@ -5,6 +5,11 @@ public class UserResgistrationDTO {
 	private String lastName;
 	private String email;
 	private String password;
+	
+	public UserResgistrationDTO() {
+
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
