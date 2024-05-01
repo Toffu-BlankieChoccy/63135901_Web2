@@ -15,30 +15,30 @@ import tech.toffu.business_web_app_project.services.UserService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Bean
-    public static BCryptPasswordEncoder passwordEncoder() {
-       return new BCryptPasswordEncoder();
-    }
-	
+	public static BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 				.authorizeHttpRequests((authorize) -> authorize.requestMatchers("/registration**").permitAll()
 						.requestMatchers("/js/**").permitAll().requestMatchers("/css/**").permitAll()
-						.requestMatchers("/img/**").permitAll())
+						.requestMatchers("/img/**").permitAll().anyRequest().authenticated()) // Permit access to any
+																								// other requests for
+																								// authenticated users
 				.formLogin(form -> form.loginPage("/login").permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
 		return http.build();
 	}
-	
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-				.userDetailsService(userService)
-				.passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 	}
 }
