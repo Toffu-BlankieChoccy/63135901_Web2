@@ -29,21 +29,21 @@ public class EmployeeImp implements EmployeeService {
 	}
 
 	@Override
-	public Employee getEmployeeById(long id) {
-		Optional<Employee> optional = employeeRepository.findById(id);
+	public Employee getEmployeeById(long employee_id) {
+		Optional<Employee> optional = employeeRepository.findById(employee_id);
 		Employee employee = null;
 		if (optional.isPresent()) {
 			employee = optional.get();
 		} else {
-			throw new RuntimeException("Employee not found for id :: " + id);
+			throw new RuntimeException("Employee not found for id :: " + employee_id);
 		}
 		return employee;
 
 	}
 
 	@Override
-	public void deleteEmployeeById(long id) {
-		this.employeeRepository.deleteById(id);
+	public void deleteEmployeeById(long employee_id) {
+		this.employeeRepository.deleteById(employee_id);
 	}
 
 	@Override
