@@ -1,5 +1,7 @@
 package tech.toffu.business_web_app_project.models;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,8 +17,24 @@ public class Employee {
 	@Column(name = "last_name")
 	private String lastName;
 
+	@Column(name = "date_of_birth")
+	private Date dateOfBirth;
+
 	@Column(name = "email")
 	private String email;
+
+	@Column(name = "phone_number")
+	private String phoneNumber;
+
+	@Column(name = "hire_date")
+	private Date hireDate;
+
+	@Column(name = "job_title")
+	private String jobTitle;
+
+	@ManyToOne
+	@JoinColumn(name = "department_id")
+	private Department department;
 
 	public long getId() {
 		return id;
@@ -40,6 +58,46 @@ public class Employee {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Date getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	public String getEmail() {

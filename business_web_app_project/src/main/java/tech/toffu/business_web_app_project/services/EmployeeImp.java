@@ -35,7 +35,7 @@ public class EmployeeImp implements EmployeeService {
 		if (optional.isPresent()) {
 			employee = optional.get();
 		} else {
-			throw new RuntimeException("Employee not found for id :: " + employee_id);
+			throw new RuntimeException("Employee not found for id : " + employee_id);
 		}
 		return employee;
 
@@ -54,4 +54,5 @@ public class EmployeeImp implements EmployeeService {
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.employeeRepository.findAll(pageable);
 	}
+
 }

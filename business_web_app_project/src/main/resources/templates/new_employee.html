@@ -37,12 +37,51 @@
         />
 
         <input
-          type="text"
+          type="email"
           th:field="*{email}"
           placeholder="Employee Email"
           class="form-control mb-4 col-4"
         />
 
+        <input
+          type="text"
+          th:field="*{phoneNumber}"
+          placeholder="Phone Number"
+          class="form-control mb-4 col-4"
+        />
+
+        <input
+          placeholder="Birthdate"
+          class="textbox-n form-control mb-4 col-4"
+          type="text"
+          onfocus="(this.type='date')"
+          onblur="(this.type='text')"
+          th:field="*{dateOfBirth}"
+        />
+
+        <input
+          placeholder="Hiredate"
+          class="textbox-n form-control mb-4 col-4"
+          type="text"
+          onfocus="(this.type='date')"
+          onblur="(this.type='text')"
+          th:field="*{hireDate}"
+        />
+
+        <input
+          type="text"
+          th:field="*{jobTitle}"
+          placeholder="Job Title"
+          class="form-control mb-4 col-4"
+        />
+        <!-- Assuming you have a list of departments, you can use a select dropdown for department selection -->
+        <!-- <select th:field="*{department.id}" class="form-control mb-4 col-4">
+          <option
+            th:each="dept : ${departments}"
+            th:value="${dept.id}"
+            th:text="${dept.departmentName}"
+          ></option>
+        </select> -->
         <button type="submit" class="btn btn-info col-2">Save Employee</button>
       </form>
 
