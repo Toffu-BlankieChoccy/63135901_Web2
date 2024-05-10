@@ -10,26 +10,11 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="/static/style.css"
-      th:href="@{/static/style.css}"
-      th:unless="isTemplate"
-    />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav
-      class="navbar navbar-default navbar-static-top"
-      role="navigation"
-      style="margin-bottom: 0"
-    >
-      <div th:replace="fragments/navbar :: header">
-        <!-- /.navbar-header -->
-      </div>
-    </nav>
+    <!-- create navigation bar ( header) -->
+    <div th:replace="fragments/navbar :: body"></div>
+
     <br />
     <br />
 
@@ -163,11 +148,5 @@
         </div>
       </div>
     </div>
-
-    <script
-      type="text/javascript"
-      src="/static/script.js"
-      th:src="@{/static/script.js}"
-    ></script>
   </body>
 </html>

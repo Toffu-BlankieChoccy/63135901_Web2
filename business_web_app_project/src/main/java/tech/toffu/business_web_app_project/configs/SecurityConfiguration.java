@@ -29,6 +29,7 @@ public class SecurityConfiguration {
 		http.csrf().disable()
 				.authorizeHttpRequests((authorize) -> authorize.requestMatchers("/registration**").permitAll()
 						.requestMatchers("/js/**").permitAll().requestMatchers("/css/**").permitAll()
+						.requestMatchers("/static/**").permitAll()
 						.requestMatchers("/img/**").permitAll().anyRequest().authenticated()) // Permit access to any
 																								// other requests for
 																								// authenticated users
