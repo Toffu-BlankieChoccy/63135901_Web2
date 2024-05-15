@@ -1,79 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <link rel="stylesheet" th:href="@{/static/navbar.css}" />
+    <link rel="stylesheet" th:href="@{/navbar.css}" />
   </head>
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#navbar"
-            aria-expanded="false"
-            aria-controls="navbar"
-          >
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span> <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#" th:href="@{/}"
-            >Employee Management System</a
-          >
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li sec:authorize="isAuthenticated()">
-              <a th:href="@{/logout}">Logout</a>
-            </li>
-          </ul>
-        </div>
+    <nav>
+      <div class="logo">
+        <img src="assets/Logo64x64.png" alt="logo" />
+        <h1>LOGO</h1>
+      </div>
+      <ul>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Services</a>
+        </li>
+        <li>
+          <a href="#">Blog</a>
+        </li>
+        <li>
+          <a href="#">Contact Us</a>
+        </li>
+      </ul>
+      <div class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
       </div>
     </nav>
+    <div class="menubar">
+      <ul>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Services</a>
+        </li>
+        <li>
+          <a href="#">Blog</a>
+        </li>
+        <li>
+          <a href="#">Contact Us</a>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
-
-<!-- <div th:fragment="header">
-  <div class="logo">
-    <img src="../../assets/Logo64x64.png" alt="logo" />
-    <h1>LOGO</h1>
-  </div>
-  <ul>
-    <li>
-      <a href="#">Home</a>
-    </li>
-    <li>
-      <a href="#">Services</a>
-    </li>
-    <li>
-      <a href="#">Blog</a>
-    </li>
-    <li>
-      <a href="#">Contact Us</a>
-    </li>
-  </ul>
-  <div class="hamburger">
-    <span class="line"></span>
-    <span class="line"></span>
-    <span class="line"></span>
-  </div>
-
-  <div class="menubar">
-    <ul>
-      <li>
-        <a href="#">Home</a>
-      </li>
-      <li>
-        <a href="#">Services</a>
-      </li>
-      <li>
-        <a href="#">Blog</a>
-      </li>
-      <li>
-        <a href="#">Contact Us</a>
-      </li>
-    </ul>
-  </div>
-</div> -->
