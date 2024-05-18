@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tech.toffu.business_web_app_project.models.Department;
 import tech.toffu.business_web_app_project.models.Employee;
+import tech.toffu.business_web_app_project.services.DepartmentService;
 import tech.toffu.business_web_app_project.services.EmployeeService;
 
 @Controller
@@ -21,6 +23,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+
+	@Autowired
+	private DepartmentService departmentService;
 
 	@GetMapping("/")
 	public String homePage(Model model) {
@@ -31,6 +36,10 @@ public class EmployeeController {
 	public String showNewEmployeeForm(Model model) {
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
+
+		List<Department> listDepartments = departmentService.getAllDepartments();
+		model.addAttribute("listDepartments", listDepartments);
+
 		return "new_employee";
 	}
 
@@ -45,6 +54,10 @@ public class EmployeeController {
 	public String showFormUpdate(@PathVariable(value = "id") long id, Model model) {
 		Employee employee = employeeService.getEmployeeById(id);
 		model.addAttribute("employee", employee);
+
+		List<Department> listDepartments = departmentService.getAllDepartments();
+		model.addAttribute("listDepartments", listDepartments);
+
 		return "update_employee";
 	}
 

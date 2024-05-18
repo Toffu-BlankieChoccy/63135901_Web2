@@ -18,6 +18,12 @@ public class Department {
     @Column(name = "department_name")
     private String departmentName;
 
+    @Column(name = "Location")
+    private String location;
+
+    @Column(name = "Contact_Information")
+    private String contactInformation;
+
     public Long getId() {
         return id;
     }
@@ -32,6 +38,22 @@ public class Department {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getContactInformation() {
+        return contactInformation;
+    }
+
+    public void setContactInformation(String contactInformation) {
+        this.contactInformation = contactInformation;
     }
 
 }

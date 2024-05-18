@@ -68,7 +68,12 @@
                 >Employee Job Title</a
               >
             </th>
-            <!-- <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=department&sortDir=' + ${reverseSortDir}}">Department ID</a></th> -->
+            <th>
+              <a
+                th:href="@{'/page/' + ${currentPage} + '?sortField=department&sortDir=' + ${reverseSortDir}}"
+                >Department ID</a
+              >
+            </th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -81,7 +86,9 @@
             <td th:text="${employee.dateOfBirth}"></td>
             <td th:text="${employee.phoneNumber}"></td>
             <td th:text="${employee.jobTitle}"></td>
-            <!-- <td th:text="${employee.department}"></td> -->
+            <td
+              th:text="${employee.department != null ? employee.department.departmentName : 'No Department'}"
+            ></td>
             <td>
               <a
                 th:href="@{/showFormForUpdate/{id}(id=${employee.id})}"

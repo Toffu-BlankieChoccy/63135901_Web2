@@ -77,6 +77,20 @@
           class="form-control mb-4 col-4"
         />
 
+        <select
+          placeholder="Department"
+          th:field="*{department.id}"
+          class="form-control mb-4 col-4"
+        >
+          <option
+            th:each="department : ${listDepartments}"
+            th:value="${department.id}"
+            th:selected="${department.id == employee.department.id}"
+          >
+            <span th:text="${department.departmentName}"></span>
+          </option>
+        </select>
+
         <button type="submit" class="btn btn-info col-2">
           Update Employee
         </button>
