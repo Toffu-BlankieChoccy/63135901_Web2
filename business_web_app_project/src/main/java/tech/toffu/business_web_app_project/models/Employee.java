@@ -36,6 +36,18 @@ public class Employee {
 	@JoinColumn(name = "department_id")
 	private Department department;
 
+	@ManyToOne
+	@JoinColumn(name = "manager_id")
+	private Employee manager;
+
+	@PrePersist
+	@PreUpdate
+	private void validateManager() {
+		if (this.manager != null && this.manager.getId() == this.id) {
+			throw new IllegalArgumentException("An employee cannot be their own manager.");
+		}
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -106,5 +118,13 @@ public class Employee {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Employee getManager() {
+		return manager;
+	}
+
+	public void setManager(Employee manager) {
+		this.manager = manager;
 	}
 }

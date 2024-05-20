@@ -74,7 +74,7 @@
           placeholder="Job Title"
           class="form-control mb-4 col-4"
         />
-        <!-- Assuming you have a list of departments, you can use a select dropdown for department selection -->
+
         <select
           placeholder="Department"
           th:field="*{department.id}"
@@ -87,6 +87,13 @@
             <span th:text="${department.departmentName}"></span>
           </option>
         </select>
+
+        <input
+          type="number"
+          th:field="*{manager.id}"
+          placeholder="Manager"
+          class="form-control mb-4 col-4"
+        />
 
         <button type="submit" class="btn btn-info col-2">Save Employee</button>
       </form>
