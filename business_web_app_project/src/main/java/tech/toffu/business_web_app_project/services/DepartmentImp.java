@@ -43,17 +43,17 @@ public class DepartmentImp implements DepartmentService {
     }
 
     @Override
-	public void deleteDepartmentById(long departmentId) {
-		this.departmentRepository.deleteById(departmentId);
-	}
+    public void deleteDepartmentById(long departmentId) {
+        this.departmentRepository.deleteById(departmentId);
+    }
 
     @Override
-	public Page<Department> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
-		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
-				: Sort.by(sortField).descending();
+    public Page<Department> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
 
-		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-		return this.departmentRepository.findAll(pageable);
-	}
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.departmentRepository.findAll(pageable);
+    }
 
 }

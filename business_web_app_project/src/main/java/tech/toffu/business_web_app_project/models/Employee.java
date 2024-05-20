@@ -40,6 +40,10 @@ public class Employee {
 	@JoinColumn(name = "manager_id")
 	private Employee manager;
 
+	// @ManyToOne
+	// @JoinColumn(name = "role_id")
+	// private EmployeeRole employeeRole;
+
 	@PrePersist
 	@PreUpdate
 	private void validateManager() {
