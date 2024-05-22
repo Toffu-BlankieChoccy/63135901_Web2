@@ -13,7 +13,16 @@ public class EmployeeRole {
     @Column(name = "role_name")
     private String roleName;
 
+    @Column(name = "description")
+    private String description;
+
     // Getter setter
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
     public long getId() {
         return id;
     }
