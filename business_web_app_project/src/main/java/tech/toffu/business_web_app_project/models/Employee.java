@@ -40,9 +40,9 @@ public class Employee {
 	@JoinColumn(name = "manager_id")
 	private Employee manager;
 
-	// @ManyToOne
-	// @JoinColumn(name = "role_id")
-	// private EmployeeRole employeeRole;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private EmployeeRole employeeRole;
 
 	@PrePersist
 	@PreUpdate
@@ -131,4 +131,12 @@ public class Employee {
 	public void setManager(Employee manager) {
 		this.manager = manager;
 	}
+
+	public EmployeeRole getEmployeeRole() {
+        return employeeRole;
+    }
+
+    public void setEmployeeRole(EmployeeRole employeeRole) {
+        this.employeeRole = employeeRole;
+    }
 }

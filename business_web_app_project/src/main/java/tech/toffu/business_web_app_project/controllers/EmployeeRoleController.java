@@ -34,7 +34,7 @@ public class EmployeeRoleController {
     @PostMapping("/saveEmployeeRole")
     public String saveEmployeeRole(@ModelAttribute("employeeRole") EmployeeRole employeeRole) {
         employeeRoleService.saveEmployeeRole(employeeRole);
-        return "redirect:/employee_role";
+        return "redirect:/employeeRole";
     }
 
     @GetMapping("/showFormForUpdateEmployeeRole/{id}")
@@ -47,7 +47,7 @@ public class EmployeeRoleController {
     @GetMapping("/deleteEmployeeRole/{id}")
     public String deleteEmployeeRole(@PathVariable(value = "id") long id) {
         this.employeeRoleService.deleteEmployeeRoleById(id);
-        return "redirect:/employee_role";
+        return "redirect:/employeeRole";
     }
 
     @GetMapping("/page3/{pageNo}")

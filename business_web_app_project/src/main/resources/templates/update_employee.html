@@ -78,6 +78,19 @@
         />
 
         <select
+          placeholder="Role"
+          th:field="*{employeeRole.id}"
+          class="form-control mb-4 col-4"
+        >
+          <option
+            th:each="employeeRole : ${listEmployeeRoles}"
+            th:value="${employeeRole.id}"
+          >
+            <span th:text="${employeeRole.roleName}"></span>
+          </option>
+        </select>
+
+        <select
           placeholder="Department"
           th:field="*{department.id}"
           class="form-control mb-4 col-4"

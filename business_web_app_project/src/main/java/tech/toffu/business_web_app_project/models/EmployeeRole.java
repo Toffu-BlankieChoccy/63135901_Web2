@@ -1,5 +1,7 @@
 package tech.toffu.business_web_app_project.models;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,13 +18,25 @@ public class EmployeeRole {
     @Column(name = "description")
     private String description;
 
+    @OneToMany(mappedBy = "employeeRole")
+    private Set<Employee> employees;
+
     // Getter setter
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
+    
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public long getId() {
         return id;
     }

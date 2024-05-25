@@ -46,6 +46,12 @@
             </th>
             <th>
               <a
+                th:href="@{'/page/' + ${currentPage} + '?sortField=roleName&sortDir=' + ${reverseSortDir}}"
+                >Employee's Role'</a
+              >
+            </th>
+            <th>
+              <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}"
                 >Employee Email</a
               >
@@ -94,6 +100,9 @@
             <td th:text="${employee.id}"></td>
             <td th:text="${employee.firstName}"></td>
             <td th:text="${employee.lastName}"></td>
+            <td
+              th:text="${employee.employeeRole != null ? employee.employeeRole.roleName : 'No Role'}"
+            ></td>
             <td th:text="${employee.email}"></td>
             <td th:text="${employee.hireDate}"></td>
             <td th:text="${employee.dateOfBirth}"></td>

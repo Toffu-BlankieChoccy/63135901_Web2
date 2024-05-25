@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import tech.toffu.business_web_app_project.models.Department;
 import tech.toffu.business_web_app_project.models.Employee;
+import tech.toffu.business_web_app_project.models.EmployeeRole;
 import tech.toffu.business_web_app_project.services.DepartmentService;
+import tech.toffu.business_web_app_project.services.EmployeeRoleService;
 import tech.toffu.business_web_app_project.services.EmployeeService;
 
 @Controller
@@ -26,6 +28,9 @@ public class EmployeeController {
 
 	@Autowired
 	private DepartmentService departmentService;
+
+	@Autowired
+	private EmployeeRoleService employeeRoleService;
 
 	@GetMapping("/")
 	public String homePage(Model model) {
@@ -39,6 +44,9 @@ public class EmployeeController {
 
 		List<Department> listDepartments = departmentService.getAllDepartments();
 		model.addAttribute("listDepartments", listDepartments);
+
+		List<EmployeeRole> listEmployeeRoles = employeeRoleService.getAllEmployeeRoles();
+		model.addAttribute("listEmployeeRoles", listEmployeeRoles);
 
 		return "new_employee";
 	}
@@ -63,6 +71,9 @@ public class EmployeeController {
 
 		List<Department> listDepartments = departmentService.getAllDepartments();
 		model.addAttribute("listDepartments", listDepartments);
+
+		List<EmployeeRole> listEmployeeRoles = employeeRoleService.getAllEmployeeRoles();
+		model.addAttribute("listEmployeeRoles", listEmployeeRoles);
 
 		return "update_employee";
 	}

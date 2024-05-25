@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tech.toffu.business_web_app_project.models.Employee;
 import tech.toffu.business_web_app_project.models.Task;
+import tech.toffu.business_web_app_project.services.EmployeeService;
 import tech.toffu.business_web_app_project.services.TaskService;
 
 @Controller
 public class TaskController {
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping("/task")
     public String taskPage(Model model) {
@@ -29,12 +34,15 @@ public class TaskController {
     public String showNewTaskForm(Model model) {
         Task task = new Task();
         model.addAttribute("task", task);
+
+        List<Employee> listEmployees = employeeService.getAllEmployees();
+        model.addAttribute("listEmployees", listEmployees);
+
         return "new_task";
     }
 
     @PostMapping("/saveTask")
     public String saveTask(@ModelAttribute("task") Task task) {
-        // Save task to database
         taskService.saveTask(task);
         return "redirect:/task";
     }
@@ -43,6 +51,9 @@ public class TaskController {
     public String showFormUpdate(@PathVariable(value = "id") long id, Model model) {
         Task task = taskService.getTaskById(id);
         model.addAttribute("task", task);
+
+        List<Employee> listEmployees = employeeService.getAllEmployees();
+        model.addAttribute("listEmployees", listEmployees);
         return "update_task";
     }
 

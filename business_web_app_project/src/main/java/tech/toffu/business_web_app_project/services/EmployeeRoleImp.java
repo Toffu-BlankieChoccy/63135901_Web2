@@ -28,20 +28,20 @@ public class EmployeeRoleImp implements EmployeeRoleService {
     }
 
     @Override
-    public EmployeeRole getEmployeeRoleById(long employeRoleId) {
-        Optional<EmployeeRole> optional = employeeRoleRepository.findById(employeRoleId);
+    public EmployeeRole getEmployeeRoleById(long employeeRoleId) {
+        Optional<EmployeeRole> optional = employeeRoleRepository.findById(employeeRoleId);
         EmployeeRole employeeRole = null;
         if (optional.isPresent()) {
             employeeRole = optional.get();
         } else {
-            throw new RuntimeException("Role not found for id : " + employeRoleId);
+            throw new RuntimeException("Role not found for id : " + employeeRoleId);
         }
         return employeeRole;
     }
 
     @Override
-    public void deleteEmployeeRoleById(long employeRoleId) {
-        this.employeeRoleRepository.deleteById(employeRoleId);
+    public void deleteEmployeeRoleById(long employeeRoleId) {
+        this.employeeRoleRepository.deleteById(employeeRoleId);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import tech.toffu.business_web_app_project.models.Employee;
 
 public interface EmployeeService {
+	
 	List<Employee> getAllEmployees();
 
 	void saveEmployee(Employee employee);
