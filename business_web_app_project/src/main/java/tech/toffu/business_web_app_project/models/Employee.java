@@ -29,28 +29,13 @@ public class Employee {
 	@Column(name = "hire_date")
 	private Date hireDate;
 
-	@Column(name = "job_title")
-	private String jobTitle;
-
 	@ManyToOne
 	@JoinColumn(name = "department_id")
 	private Department department;
 
 	@ManyToOne
-	@JoinColumn(name = "manager_id")
-	private Employee manager;
-
-	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private EmployeeRole employeeRole;
-
-	@PrePersist
-	@PreUpdate
-	private void validateManager() {
-		if (this.manager != null && this.manager.getId() == this.id) {
-			throw new IllegalArgumentException("An employee cannot be their own manager.");
-		}
-	}
 
 	public long getId() {
 		return id;
@@ -100,14 +85,6 @@ public class Employee {
 		this.hireDate = hireDate;
 	}
 
-	public String getJobTitle() {
-		return jobTitle;
-	}
-
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
-	}
-
 	public Department getDepartment() {
 		return department;
 	}
@@ -124,19 +101,11 @@ public class Employee {
 		this.email = email;
 	}
 
-	public Employee getManager() {
-		return manager;
-	}
-
-	public void setManager(Employee manager) {
-		this.manager = manager;
-	}
-
 	public EmployeeRole getEmployeeRole() {
-        return employeeRole;
-    }
+		return employeeRole;
+	}
 
-    public void setEmployeeRole(EmployeeRole employeeRole) {
-        this.employeeRole = employeeRole;
-    }
+	public void setEmployeeRole(EmployeeRole employeeRole) {
+		this.employeeRole = employeeRole;
+	}
 }

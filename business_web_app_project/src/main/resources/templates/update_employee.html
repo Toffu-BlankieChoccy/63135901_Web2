@@ -70,13 +70,6 @@
           th:field="*{hireDate}"
         />
 
-        <input
-          type="text"
-          th:field="*{jobTitle}"
-          placeholder="Job Title"
-          class="form-control mb-4 col-4"
-        />
-
         <select
           placeholder="Role"
           th:field="*{employeeRole.id}"
@@ -103,13 +96,6 @@
             <span th:text="${department.departmentName}"></span>
           </option>
         </select>
-
-        <input
-          type="number"
-          th:field="*{manager.id}"
-          placeholder="Manager ID"
-          class="form-control mb-4 col-4"
-        />
 
         <button type="submit" class="btn btn-info col-2">
           Update Employee

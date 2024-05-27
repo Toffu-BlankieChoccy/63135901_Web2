@@ -29,67 +29,55 @@
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}"
-                >Employee's ID'</a
+                >ID</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}"
-                >Employee First Name</a
+                >First Name</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}"
-                >Employee Last Name</a
+                >Last Name</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=roleName&sortDir=' + ${reverseSortDir}}"
-                >Employee's Role'</a
+                >Role</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}"
-                >Employee Email</a
+                >Email</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=hireDate&sortDir=' + ${reverseSortDir}}"
-                >Employee Hire Date</a
+                >Hire Date</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=dateOfBirth&sortDir=' + ${reverseSortDir}}"
-                >Employee Birthdate</a
+                >Birthdate</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=phoneNumber&sortDir=' + ${reverseSortDir}}"
-                >Employee Phone Number</a
-              >
-            </th>
-            <th>
-              <a
-                th:href="@{'/page/' + ${currentPage} + '?sortField=jobTitle&sortDir=' + ${reverseSortDir}}"
-                >Employee Job Title</a
+                >Contact Number</a
               >
             </th>
             <th>
               <a
                 th:href="@{'/page/' + ${currentPage} + '?sortField=department&sortDir=' + ${reverseSortDir}}"
-                >Department ID</a
-              >
-            </th>
-            <th>
-              <a
-                th:href="@{'/page/' + ${currentPage} + '?sortField=manager.id&sortDir=' + ${reverseSortDir}}"
-                >Manager ID</a
+                >Department</a
               >
             </th>
             <th>Actions</th>
@@ -107,12 +95,8 @@
             <td th:text="${employee.hireDate}"></td>
             <td th:text="${employee.dateOfBirth}"></td>
             <td th:text="${employee.phoneNumber}"></td>
-            <td th:text="${employee.jobTitle}"></td>
             <td
               th:text="${employee.department != null ? employee.department.departmentName : 'No Department'}"
-            ></td>
-            <td
-              th:text="${employee.manager != null ? employee.manager.id : 'No Manager'}"
             ></td>
             <!-- Actions -->
             <td>

@@ -24,8 +24,9 @@ public class Task {
     @Column(name = "end_date")
     private Date endDate;
 
-    @Column(name = "status", length = 50)
-    private String status;
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "assigned_to")
@@ -75,11 +76,11 @@ public class Task {
         this.endDate = endDate;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

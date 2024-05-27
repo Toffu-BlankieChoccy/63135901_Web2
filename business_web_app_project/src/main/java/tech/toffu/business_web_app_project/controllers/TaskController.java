@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tech.toffu.business_web_app_project.models.Employee;
+import tech.toffu.business_web_app_project.models.Status;
 import tech.toffu.business_web_app_project.models.Task;
 import tech.toffu.business_web_app_project.services.EmployeeService;
+import tech.toffu.business_web_app_project.services.StatusService;
 import tech.toffu.business_web_app_project.services.TaskService;
 
 @Controller
@@ -24,6 +26,9 @@ public class TaskController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private StatusService statusService;
 
     @GetMapping("/task")
     public String taskPage(Model model) {
@@ -38,11 +43,42 @@ public class TaskController {
         List<Employee> listEmployees = employeeService.getAllEmployees();
         model.addAttribute("listEmployees", listEmployees);
 
+        List<Status> listStatuses = statusService.getAllStatuses();
+        model.addAttribute("listStatuses", listStatuses);
+
         return "new_task";
     }
 
     @PostMapping("/saveTask")
     public String saveTask(@ModelAttribute("task") Task task) {
+        // Perform validation
+        Employee assignedBy = task.getAssignedBy();
+        Employee assignedTo = task.getAssignedTo();
+
+        if (assignedBy == null || assignedTo == null) {
+            // Handle error: both fields must be filled
+            return "redirect:/showNewTaskForm?error=missing_assigned";
+        }
+
+        // if (!assignedBy.getDepartment().equals(assignedTo.getDepartment())) {
+        // // Handle error: Assigner and assignee must be in the same department
+        // return "redirect:/showNewTaskForm?error=invalid_department";
+        // }
+
+        // if (assignedBy.getEmployeeRole().getRoleName().equalsIgnoreCase("Manager") &&
+        // assignedBy.getId() == assignedTo.getId()) {
+        // // Handle error: Manager cannot assign tasks to themselves
+        // return "redirect:/showNewTaskForm?error=manager_self_assign";
+        // }
+
+        // if (!assignedBy.getEmployeeRole().getRoleName().equalsIgnoreCase("Manager")
+        // &&
+        // !assignedBy.getEmployeeRole().getRoleName().equalsIgnoreCase("Team Leader")
+        // &&
+        // assignedBy.getId() != assignedTo.getId()) {
+        // // Handle error: Only Manager or Team Leader can assign tasks to others
+        // return "redirect:/showNewTaskForm?error=invalid_assigner";
+        // }
         taskService.saveTask(task);
         return "redirect:/task";
     }
@@ -54,6 +90,9 @@ public class TaskController {
 
         List<Employee> listEmployees = employeeService.getAllEmployees();
         model.addAttribute("listEmployees", listEmployees);
+
+        List<Status> listStatuses = statusService.getAllStatuses();
+        model.addAttribute("listStatuses", listStatuses);
         return "update_task";
     }
 

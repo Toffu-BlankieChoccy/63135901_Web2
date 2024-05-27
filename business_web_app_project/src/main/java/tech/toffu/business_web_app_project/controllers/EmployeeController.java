@@ -53,12 +53,6 @@ public class EmployeeController {
 
 	@PostMapping("/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-		if (employee.getManager() != null && employee.getManager().getId() != 0) {
-			Employee manager = employeeService.getEmployeeById(employee.getManager().getId());
-			employee.setManager(manager);
-		} else {
-			employee.setManager(null);
-		}
 		// Save employee to database
 		employeeService.saveEmployee(employee);
 		return "redirect:/";

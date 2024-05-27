@@ -84,9 +84,13 @@
             <td th:text="${task.description}"></td>
             <td th:text="${task.startDate}"></td>
             <td th:text="${task.endDate}"></td>
-            <td th:text="${task.status}"></td>
-            <td th:text="${task.assignedTo}"></td>
-            <td th:text="${task.assignedBy}"></td>
+            <td th:text="${task.status.name}"></td>
+            <td
+              th:text="${task.assignedTo.firstName + ' ' + task.assignedTo.lastName}"
+            ></td>
+            <td
+              th:text="${task.assignedBy.firstName + ' ' + task.assignedBy.lastName}"
+            ></td>
             <!-- Actions -->
             <td>
               <a
