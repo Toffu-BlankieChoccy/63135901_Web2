@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Download Document</title>
+  </head>
+  <body>
+    <h1>Download Document</h1>
+
+    <!-- JavaScript to trigger file download -->
+    <script>
+      // Function to trigger file download
+      function downloadFile(url) {
+        // Create a temporary anchor element
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = url.substr(url.lastIndexOf("/") + 1);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      // Call the download function when the page loads
+      window.onload = function () {
+        // Replace '[[${document.filePath}]]' with the actual file path from your model
+        downloadFile("[[${document.filePath}]]");
+      };
+    </script>
+  </body>
+</html>

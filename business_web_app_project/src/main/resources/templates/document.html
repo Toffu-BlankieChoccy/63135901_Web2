@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" th:href="@{/navbar.css}" />
+  </head>
+  <body>
+    <!-- create navigation bar ( header) -->
+    <div th:replace="fragments/navbar :: body"></div>
+
+    <br />
+    <br />
+
+    <div class="container my-2">
+      <h1>Documents List</h1>
+      <a th:href="@{/showNewDocumentForm}" class="btn btn-primary btn-sm mb-3"
+        >Add Document</a
+      >
+      <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+          <tr>
+            <th>
+              <a
+                th:href="@{'/page4/' + ${currentPage} + '?sortField=documentName&sortDir=' + ${reverseSortDir}}"
+                >Document Name</a
+              >
+            </th>
+            <th>
+              <a
+                th:href="@{'/page4/' + ${currentPage} + '?sortField=uploadDate&sortDir=' + ${reverseSortDir}}"
+                >Upload Date</a
+              >
+            </th>
+            <th>
+              <a
+                th:href="@{'/page4/' + ${currentPage} + '?sortField=filePath&sortDir=' + ${reverseSortDir}}"
+                >File path</a
+              >
+            </th>
+            <th>
+              <a
+                th:href="@{'/page4/' + ${currentPage} + '?sortField=uploadedBy&sortDir=' + ${reverseSortDir}}"
+                >Uploaded By</a
+              >
+            </th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="document : ${listDocuments}">
+            <td th:text="${document.documentName}"></td>
+            <td th:text="${document.description}"></td>
+            <td th:text="${document.uploadDate}"></td>
+            <td
+              th:text="${document.uploadedBy.firstName} + ' ' + ${document.uploadedBy.lastName}"
+            ></td>
+            <td>
+              <a
+                th:href="@{/downloadDocument/{id}(id=${document.documentId})}"
+                class="btn btn-success"
+                >Download</a
+              >
+              <a
+                th:href="@{/deleteDocument/{id}(id=${document.documentId})}"
+                class="btn btn-danger"
+                >Delete</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+          <div class="col-sm-2">Total Rows: [[${totalItems}]]</div>
+          <div class="col-sm-1">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+              <a
+                th:if="${currentPage != i}"
+                th:href="@{'/page4/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+                >[[${i}]]</a
+              >
+              <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
+              &nbsp;
+            </span>
+          </div>
+          <div class="col-sm-1">
+            <a
+              th:if="${currentPage < totalPages}"
+              th:href="@{'/page4/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+              >Next</a
+            >
+            <span th:unless="${currentPage < totalPages}">Next</span>
+          </div>
+          <div class="col-sm-1">
+            <a
+              th:if="${currentPage < totalPages}"
+              th:href="@{'/page4/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+              >Last</a
+            >
+            <span th:unless="${currentPage < totalPages}">Last</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/script.js}"></script>
+  </body>
+</html>
