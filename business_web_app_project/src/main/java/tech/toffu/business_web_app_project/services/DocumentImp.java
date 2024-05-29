@@ -9,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import tech.toffu.business_web_app_project.models.Department;
 import tech.toffu.business_web_app_project.models.Document;
 import tech.toffu.business_web_app_project.repositories.DocumentRepository;
 
@@ -35,7 +34,7 @@ public class DocumentImp implements DocumentService {
         if (optional.isPresent()) {
             document = optional.get();
         } else {
-            throw new RuntimeException("Department not found for id : " + documentId);
+            throw new RuntimeException("Document not found for id : " + documentId);
         }
         return document;
     }
@@ -51,6 +50,6 @@ public class DocumentImp implements DocumentService {
                 : Sort.by(sortField).descending();
 
         PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return this.documentRepository.findAll(pageable);
+        return documentRepository.findAll(pageable);
     }
 }
