@@ -40,12 +40,6 @@
             </th>
             <th>
               <a
-                th:href="@{'/page4/' + ${currentPage} + '?sortField=filePath&sortDir=' + ${reverseSortDir}}"
-                >File path</a
-              >
-            </th>
-            <th>
-              <a
                 th:href="@{'/page4/' + ${currentPage} + '?sortField=uploadedBy&sortDir=' + ${reverseSortDir}}"
                 >Uploaded By</a
               >
@@ -57,7 +51,6 @@
         <tbody>
           <tr th:each="document : ${listDocuments}">
             <td th:text="${document.documentName}"></td>
-            <td th:text="${document.description}"></td>
             <td th:text="${document.uploadDate}"></td>
             <td
               th:text="${document.uploadedBy.firstName} + ' ' + ${document.uploadedBy.lastName}"

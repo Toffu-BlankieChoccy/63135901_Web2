@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
 import tech.toffu.business_web_app_project.models.Document;
 import tech.toffu.business_web_app_project.models.Employee;
@@ -64,8 +65,17 @@ public class DocumentController {
             return "redirect:/showNewDocumentForm?error=emptyFile";
         }
 
+        // Check file type
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if (!fileName.toLowerCase().endsWith(".doc") &&
+                !fileName.toLowerCase().endsWith(".docx") &&
+                !fileName.toLowerCase().endsWith(".pdf")) {
+            // Handle invalid file type
+            return "redirect:/showNewDocumentForm?error=invalidFileType";
+        }
+
         // Save the file locally
-        Path filePath = Paths.get(uploadDir, file.getOriginalFilename());
+        Path filePath = Paths.get(uploadDir, fileName);
         Files.createDirectories(filePath.getParent());
         Files.write(filePath, file.getBytes());
 
@@ -106,10 +116,17 @@ public class DocumentController {
 
             // Check if the resource exists and is readable
             if (resource.exists() && resource.isReadable()) {
+                // Extract the file extension from the stored file path
+                String extension = StringUtils.getFilenameExtension(document.getFilePath());
+                String fileName = document.getDocumentName() + "." + extension;
+
+                String contentType = Files.probeContentType(Paths.get(document.getFilePath()));
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.parseMediaType(contentType));
+                headers.setContentDispositionFormData("attachment", fileName);
+
                 return ResponseEntity.ok()
-                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                        .header(HttpHeaders.CONTENT_DISPOSITION,
-                                "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .headers(headers)
                         .body(resource);
             } else {
                 // Handle resource not found or not readable
