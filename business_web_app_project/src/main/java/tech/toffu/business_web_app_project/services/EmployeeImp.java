@@ -55,4 +55,9 @@ public class EmployeeImp implements EmployeeService {
 		return this.employeeRepository.findAll(pageable);
 	}
 
+	@Override
+    public List<Employee> searchEmployees(String keyword) {
+        return employeeRepository.searchEmployees(keyword);
+    }
+
 }
