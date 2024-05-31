@@ -20,7 +20,7 @@ public class EmployeeRoleController {
     private EmployeeRoleService employeeRoleService;
 
     @GetMapping("/employeeRole")
-    public String departmentPage(Model model) {
+    public String employeeRolePage(Model model) {
         return findPaginated(1, "roleName", "asc", model);
     }
 

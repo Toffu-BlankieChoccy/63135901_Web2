@@ -23,7 +23,7 @@
               <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h1>Add Employee Form</h1>
+                    <h1>Add Department Form</h1>
                     <form
                       action="#"
                       th:action="@{/saveDepartment}"
@@ -91,77 +91,15 @@
               </div>
             </div>
           </div>
+          <div th:replace="fragments/footer :: footer"></div>
           <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
-          <footer class="footer">
-            <div class="card">
-              <div class="card-body">
-                <div
-                  class="d-sm-flex justify-content-center justify-content-sm-between py-2"
-                >
-                  <span
-                    class="text-muted text-center text-sm-left d-block d-sm-inline-block"
-                    >Copyright © <a target="_blank">Toffu </a>2024</span
-                  >
-                  <span
-                    class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"
-                  >
-                    <a href="https://www.bootstrapdash.com/" target="_blank">
-                      Bootstrap dashboard
-                    </a>
-                    templates</span
-                  >
-                </div>
-              </div>
-            </div>
-          </footer>
-          <!-- partial -->
         </div>
         <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->
     </div>
-    
-      <h1>Department</h1>
-      <hr />
-      <h2>Save Department</h2>
 
-      <form
-        action="#"
-        th:action="@{/saveDepartment}"
-        th:object="${department}"
-        method="POST"
-      >
-        <input
-          type="text"
-          th:field="*{departmentName}"
-          placeholder="Department Name"
-          class="form-control mb-4 col-4"
-        />
-
-        <input
-          type="text"
-          th:field="*{location}"
-          placeholder="Location"
-          class="form-control mb-4 col-4"
-        />
-
-        <input
-          type="text"
-          th:field="*{contactInformation}"
-          placeholder="Contact Infomation"
-          class="form-control mb-4 col-4"
-        />
-
-        <button type="submit" class="btn btn-info col-2">
-          Save Department
-        </button>
-      </form>
-
-      <hr />
-
-      <a th:href="@{/department}"> Back to Department List</a>
-    </div> -->
+    <div th:replace="fragments/footer :: footer"></div>
     <script th:src="@{/js/script.js}"></script>
   </body>
 </html>

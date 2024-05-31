@@ -9,12 +9,14 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <title>Employee Admin</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
   </head>
   <body>
     <div class="container">
-      <h1>Role</h1>
+      <h1>Add Role</h1>
       <hr />
-      <h2>Save Role</h2>
 
       <form
         action="#"
@@ -22,25 +24,41 @@
         th:object="${employeeRole}"
         method="POST"
       >
-        <input
-          type="text"
-          th:field="*{roleName}"
-          placeholder="Role Name"
-          class="form-control mb-4 col-4"
-        />
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Role Name</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="text"
+              th:field="*{roleName}"
+              placeholder="Role Name"
+              class="form-control mb-4 col-4"
+            />
+          </div>
+        </div>
 
-        <input
-          type="text"
-          th:field="*{description}"
-          placeholder="Description"
-          class="form-control mb-4 col-4"
-        />
-        <button type="submit" class="btn btn-info col-2">Save Role</button>
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Description</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="text"
+              th:field="*{description}"
+              placeholder="Description"
+              class="form-control mb-4 col-4"
+            />
+          </div>
+        </div>
+        <div class="form-check form-check-flat form-check-primary"></div>
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        <a th:href="@{/employeeRole}" class="btn btn-light"> Cancel </a>
       </form>
 
       <hr />
-
-      <a th:href="@{/employeeRole}"> Back to Role List</a>
     </div>
+    <div th:replace="fragments/footer :: footer"></div>
+    <script th:src="@{/js/script.js}"></script>
   </body>
 </html>
