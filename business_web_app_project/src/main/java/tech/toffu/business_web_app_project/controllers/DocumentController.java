@@ -27,7 +27,6 @@ import org.springframework.util.StringUtils;
 
 import tech.toffu.business_web_app_project.models.Document;
 import tech.toffu.business_web_app_project.models.Employee;
-import tech.toffu.business_web_app_project.models.Task;
 import tech.toffu.business_web_app_project.services.DocumentService;
 import tech.toffu.business_web_app_project.services.EmployeeService;
 
@@ -42,9 +41,7 @@ public class DocumentController {
 
     @GetMapping("/document")
     public String viewDocuments(Model model) {
-        List<Document> listDocuments = documentService.getAllDocuments();
-        model.addAttribute("listDocuments", listDocuments);
-        return "document";
+        return findPaginated(1, "documentName", "asc", model);
     }
 
     @GetMapping("/showNewDocumentForm")
