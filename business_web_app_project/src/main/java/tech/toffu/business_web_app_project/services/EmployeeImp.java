@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import tech.toffu.business_web_app_project.models.Department;
 import tech.toffu.business_web_app_project.models.Employee;
 import tech.toffu.business_web_app_project.repositories.EmployeeRepository;
 
@@ -56,8 +58,12 @@ public class EmployeeImp implements EmployeeService {
 	}
 
 	@Override
-    public List<Employee> searchEmployees(String keyword) {
-        return employeeRepository.searchEmployees(keyword);
-    }
+	public Page<Employee> searchPaginated(String keyword, int pageNo, int pageSize, String sortField,
+			String sortDirection) {
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+				: Sort.by(sortField).descending();
+		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+		return employeeRepository.searchEmployees(keyword, pageable);
+	}
 
 }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Department</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <title>Employee Admin</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+  </head>
+  <body>
+    <!-- create navigation bar ( header) -->
+    <div th:replace="fragments/navbar :: body"></div>
+
+    <br />
+    <br />
+
+    <div class="container my-2">
+      <h1>Departments List</h1>
+      <form
+        th:action="@{/searchDepartment}"
+        method="get"
+        class="form-inline mb-3"
+      >
+        <input
+          type="text"
+          name="keyword"
+          class="form-control mr-2"
+          placeholder="Search Department..."
+        />
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+      <a th:href="@{/showNewDepartmentForm}" class="btn btn-primary btn-sm mb-3"
+        >Add Department</a
+      >
+      <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+          <tr>
+            <th>
+              <a
+                th:href="@{'/page1/' + ${currentPage} + '?sortField=departmentName&sortDir=' + ${reverseSortDir}}"
+                >Department Name</a
+              >
+            </th>
+
+            <th>
+              <a
+                th:href="@{'/page1/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}"
+                >Location</a
+              >
+            </th>
+
+            <th>
+              <a
+                th:href="@{'/page1/' + ${currentPage} + '?sortField=contactInformation&sortDir=' + ${reverseSortDir}}"
+                >Contact</a
+              >
+            </th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="department : ${listDepartments}">
+            <td th:text="${department.departmentName}"></td>
+            <td th:text="${department.location}"></td>
+            <td th:text="${department.contactInformation}"></td>
+            <td>
+              <a
+                th:href="@{/showFormForUpdateDepartment/{id}(id=${department.id})}"
+                class="btn btn-primary"
+                >Update</a
+              >
+              <a
+                th:href="@{/deleteDepartment/{id}(id=${department.id})}"
+                class="btn btn-danger"
+                >Delete</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+    <script th:src="@{/js/script.js}"></script>
+  </body>
+</html>

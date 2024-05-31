@@ -16,4 +16,8 @@ public interface DepartmentService {
     void deleteDepartmentById(long id);
 
     Page<Department> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+
+    List<Department> searchDepartments(String keyword);
+
+    Page<Department> searchPaginated(String keyword, int pageNo, int pageSize, String sortField, String sortDirection);
 }

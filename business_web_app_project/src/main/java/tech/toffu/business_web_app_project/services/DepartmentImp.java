@@ -51,9 +51,22 @@ public class DepartmentImp implements DepartmentService {
     public Page<Department> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
                 : Sort.by(sortField).descending();
-
         PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.departmentRepository.findAll(pageable);
     }
 
+    @Override
+    public List<Department> searchDepartments(String keyword) {
+        return departmentRepository.searchDepartments(keyword);
+    }
+
+    // Add this method for paginated search
+    @Override
+    public Page<Department> searchPaginated(String keyword, int pageNo, int pageSize, String sortField,
+            String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return departmentRepository.searchDepartments(keyword, pageable);
+    }
 }

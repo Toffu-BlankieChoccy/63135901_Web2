@@ -9,17 +9,29 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" th:href="@{/navbar.css}" />
+    <title>Employee Admin</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
   </head>
   <body>
     <!-- create navigation bar ( header) -->
     <div th:replace="fragments/navbar :: body"></div>
 
-    <br />
-    <br />
-
     <div class="container my-2">
-      <h1>Departments List</h1>
+      <h1>DEPARMENT LIST</h1>
+      <form
+        th:action="@{/searchDepartment}"
+        method="get"
+        class="form-inline mb-3"
+      >
+        <input
+          type="text"
+          name="keyword"
+          class="form-control mr-2"
+          placeholder="Search Department..."
+        />
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
       <a th:href="@{/showNewDepartmentForm}" class="btn btn-primary btn-sm mb-3"
         >Add Department</a
       >
@@ -28,20 +40,22 @@
           <tr>
             <th>
               <a
-                th:href="@{'/page1/' + ${currentPage} + '?sortField=departmentName&sortDir=' + ${reverseSortDir}}"
+                th:href="@{'/page1/' + ${currentPage} + '?sortField=departmentName&sortDir=' + ${reverseSortDir} + '&keyword=' + ${keyword}}"
                 >Department Name</a
               >
             </th>
+
             <th>
               <a
-                th:href="@{'/page1/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}"
+                th:href="@{'/page1/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir} + '&keyword=' + ${keyword}}"
                 >Location</a
               >
             </th>
+
             <th>
               <a
-                th:href="@{'/page1/' + ${currentPage} + '?sortField=contactInformation&sortDir=' + ${reverseSortDir}}"
-                >Contact Infomation</a
+                th:href="@{'/page1/' + ${currentPage} + '?sortField=contactInformation&sortDir=' + ${reverseSortDir} + '&keyword=' + ${keyword}}"
+                >Contact Information</a
               >
             </th>
 
@@ -72,29 +86,50 @@
       <div th:if="${totalPages > 1}">
         <div class="row col-sm-10">
           <div class="col-sm-2">Total Rows: [[${totalItems}]]</div>
+
+          <div class="col-sm-1">
+            <a
+              th:if="${currentPage > 1}"
+              th:href="@{'/page1/' + ${1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${''}}"
+              >First</a
+            >
+            <span th:unless="${currentPage > 1}">First</span>
+          </div>
+
+          <div class="col-sm-1">
+            <a
+              th:if="${currentPage > 1}"
+              th:href="@{'/page1/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${''}}"
+              >Back</a
+            >
+            <span th:unless="${currentPage > 1}">Back</span>
+          </div>
+
           <div class="col-sm-1">
             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
               <a
                 th:if="${currentPage != i}"
-                th:href="@{'/page1/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+                th:href="@{'/page1/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${''}}"
                 >[[${i}]]</a
               >
-              <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
-              &nbsp;
+              <span th:unless="${currentPage != i}">[[${i}]]</span>
+              &nbsp;&nbsp;
             </span>
           </div>
+
           <div class="col-sm-1">
             <a
               th:if="${currentPage < totalPages}"
-              th:href="@{'/page1/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+              th:href="@{'/page1/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${''}}"
               >Next</a
             >
             <span th:unless="${currentPage < totalPages}">Next</span>
           </div>
+
           <div class="col-sm-1">
             <a
               th:if="${currentPage < totalPages}"
-              th:href="@{'/page1/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+              th:href="@{'/page1/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&keyword=' + ${''}}"
               >Last</a
             >
             <span th:unless="${currentPage < totalPages}">Last</span>
@@ -102,6 +137,7 @@
         </div>
       </div>
     </div>
-    <script th:src="@{/script.js}"></script>
+    <div th:replace="fragments/footer :: footer"></div>
+    <script th:src="@{/js/script.js}"></script>
   </body>
 </html>

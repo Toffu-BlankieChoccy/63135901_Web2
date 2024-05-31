@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import tech.toffu.business_web_app_project.models.Employee;
 
 public interface EmployeeService {
-	
+
 	List<Employee> getAllEmployees();
 
 	void saveEmployee(Employee employee);
@@ -18,5 +18,6 @@ public interface EmployeeService {
 
 	Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
-	List<Employee> searchEmployees(String keyword); 
+	Page<Employee> searchPaginated(String keyword, int pageNo, int pageSize, String sortField, String sortDirection);
+
 }

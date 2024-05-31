@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import tech.toffu.business_web_app_project.models.Department;
 import tech.toffu.business_web_app_project.services.DepartmentService;
 
@@ -21,11 +22,8 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @GetMapping("/department")
-    public String departmentPage(Model model) {
-        // List<Department> listDepartments = departmentService.getAllDepartments();
-        // model.addAttribute("listDepartments", listDepartments);
-        // return "department";
-        return findPaginated(1, "departmentName", "asc", model);
+    public String departmentPage(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        return findPaginated(1, "departmentName", "asc", "", model);
     }
 
     @GetMapping("/showNewDepartmentForm")
@@ -58,21 +56,34 @@ public class DepartmentController {
     @GetMapping("/page1/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
             @RequestParam("sortField") String sortField,
-            @RequestParam("sortDir") String sortDir, Model model) {
+            @RequestParam("sortDir") String sortDir,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            Model model) {
         int pageSize = 5;
-        Page<Department> page = departmentService.findPaginated(pageNo, pageSize,
-                sortField, sortDir);
+        Page<Department> page;
+
+        if (keyword != null && !keyword.isEmpty()) {
+            page = departmentService.searchPaginated(keyword, pageNo, pageSize, sortField, sortDir);
+        } else {
+            page = departmentService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        }
+
         List<Department> listDepartments = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
-
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-
         model.addAttribute("listDepartments", listDepartments);
+        model.addAttribute("keyword", keyword);
+
         return "department";
+    }
+
+    @GetMapping("/searchDepartment")
+    public String searchDepartments(@RequestParam("keyword") String keyword, Model model) {
+        return findPaginated(1, "departmentName", "asc", keyword, model);
     }
 }

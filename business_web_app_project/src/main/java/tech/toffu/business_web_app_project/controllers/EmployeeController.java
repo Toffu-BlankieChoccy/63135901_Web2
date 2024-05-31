@@ -33,8 +33,8 @@ public class EmployeeController {
 	private EmployeeRoleService employeeRoleService;
 
 	@GetMapping("/")
-	public String homePage(Model model) {
-		return findPaginated(1, "firstName", "asc", model);
+	public String homePage(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+		return findPaginated(1, "firstName", "asc", "", model);
 	}
 
 	@GetMapping("/showNewEmployeeForm")
@@ -79,29 +79,36 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/page/{pageNo}")
-	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField,
-			@RequestParam("sortDir") String sortDir, Model model) {
+	public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
+			@RequestParam("sortField") String sortField,
+			@RequestParam("sortDir") String sortDir,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			Model model) {
 		int pageSize = 5;
-		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		Page<Employee> page;
+
+		if (keyword != null && !keyword.isEmpty()) {
+			page = employeeService.searchPaginated(keyword, pageNo, pageSize, sortField, sortDir);
+		} else {
+			page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		}
+
 		List<Employee> listEmployees = page.getContent();
 
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("totalItems", page.getTotalElements());
-
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("sortDir", sortDir);
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-
 		model.addAttribute("listEmployees", listEmployees);
+		model.addAttribute("keyword", keyword);
+
 		return "index";
 	}
 
 	@GetMapping("/search")
-    public String searchEmployees(@RequestParam("keyword") String keyword, Model model) {
-        List<Employee> searchResults = employeeService.searchEmployees(keyword);
-        model.addAttribute("listEmployees", searchResults);
-        model.addAttribute("keyword", keyword);
-        return "search_results";
-    }
+	public String searchEmployees(@RequestParam("keyword") String keyword, Model model) {
+		return findPaginated(1, "firstName", "asc", keyword, model);
+	}
 }
