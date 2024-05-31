@@ -9,12 +9,14 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <title>Employee Admin</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
   </head>
   <body>
+    <div th:replace="fragments/navbar :: body"></div>
     <div class="container">
-      <h1>Task</h1>
-      <hr />
-      <h2>Save Task</h2>
+      <h1>Add A Task</h1>
 
       <form
         action="#"
@@ -22,85 +24,126 @@
         th:object="${task}"
         method="POST"
       >
-        <input
-          type="text"
-          th:field="*{taskName}"
-          placeholder="Task Name"
-          class="form-control mb-4 col-4"
-        />
-
-        <input
-          type="text"
-          th:field="*{description}"
-          placeholder="Description"
-          class="form-control mb-4 col-4"
-        />
-
-        <input
-          placeholder="Start Date"
-          class="textbox-n form-control mb-4 col-4"
-          type="text"
-          onfocus="(this.type='date')"
-          onblur="(this.type='text')"
-          th:field="*{startDate}"
-        />
-
-        <input
-          placeholder="End Date"
-          class="textbox-n form-control mb-4 col-4"
-          type="text"
-          onfocus="(this.type='date')"
-          onblur="(this.type='text')"
-          th:field="*{endDate}"
-        />
-
-        <div class="form-group">
-          <label for="status">Status:</label>
-          <select id="status" th:field="*{status.id}" class="form-control">
-            <option
-              th:each="status : ${listStatuses}"
-              th:value="${status.id}"
-              th:text="${status.name}"
-            ></option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="assignedTo">Assigned To:</label>
-          <select
-            id="assignedTo"
-            th:field="*{assignedTo.id}"
-            class="form-control"
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Task Name</label
           >
-            <option
-              th:each="employee : ${listEmployees}"
-              th:value="${employee.id}"
-              th:text="${employee.firstName} + ' ' + ${employee.lastName}"
-            ></option>
-          </select>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              th:field="*{taskName}"
+              placeholder="Task Name"
+              class="form-control mb-4 col-4"
+            />
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="assignedBy">Assigned By:</label>
-          <select
-            id="assignedBy"
-            th:field="*{assignedBy.id}"
-            class="form-control"
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Description</label
           >
-            <option
-              th:each="employee : ${listEmployees}"
-              th:value="${employee.id}"
-              th:text="${employee.firstName} + ' ' + ${employee.lastName}"
-            ></option>
-          </select>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              th:field="*{description}"
+              placeholder="Description"
+              class="form-control mb-4 col-4"
+            />
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-info col-2">Save Task</button>
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Start Date</label
+          >
+          <div class="col-sm-9">
+            <input
+              placeholder="Start Date"
+              class="textbox-n form-control mb-4 col-4"
+              type="text"
+              onfocus="(this.type='date')"
+              onblur="(this.type='text')"
+              th:field="*{startDate}"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >End Date</label
+          >
+          <div class="col-sm-9">
+            <input
+              placeholder="End Date"
+              class="textbox-n form-control mb-4 col-4"
+              type="text"
+              onfocus="(this.type='date')"
+              onblur="(this.type='text')"
+              th:field="*{endDate}"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Status</label
+          >
+          <div class="col-sm-9">
+            <select id="status" th:field="*{status.id}" class="form-control">
+              <option
+                th:each="status : ${listStatuses}"
+                th:value="${status.id}"
+                th:text="${status.name}"
+              ></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Assigned To:</label
+          >
+          <div class="col-sm-9">
+            <select
+              id="assignedTo"
+              th:field="*{assignedTo.id}"
+              class="form-control"
+            >
+              <option
+                th:each="employee : ${listEmployees}"
+                th:value="${employee.id}"
+                th:text="${employee.firstName} + ' ' + ${employee.lastName}"
+              ></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-3 col-form-label"
+            >Assigned By:</label
+          >
+          <div class="col-sm-9">
+            <select
+              id="assignedBy"
+              th:field="*{assignedBy.id}"
+              class="form-control"
+            >
+              <option
+                th:each="employee : ${listEmployees}"
+                th:value="${employee.id}"
+                th:text="${employee.firstName} + ' ' + ${employee.lastName}"
+              ></option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        <a th:href="@{/task}" class="btn btn-light"> Cancel </a>
       </form>
 
       <hr />
-
-      <a th:href="@{/task}"> Back to Task List</a>
     </div>
+    <div th:replace="fragments/footer :: footer"></div>
+    <script th:src="@{/js/script.js}"></script>
   </body>
 </html>
